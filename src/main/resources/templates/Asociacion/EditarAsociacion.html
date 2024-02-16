@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>FUTBOL CLUB</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>EDITAR ASOCIACIÓN</h2>
+
+        <form method="post" th:action="@{/asociaciones/guardarAsociacion}"
+            th:object="${asociacion}" style="text-align: center;">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" th:value="${asociacion.nombre}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="pais">País</label>
+                <input type="text" class="form-control" id="pais" name="pais" th:value="${asociacion.pais}" required>
+            </div>
+            <div class="form-group">
+                <label for="presidente">Presidente</label>
+                <input type="text" class="form-control" id="presidente" name="presidente"
+                    th:value="${asociacion.presidente}" required>
+            </div>
+            <div class="form-group">
+                <label for="siglas">Siglas</label>
+                <input type="text" class="form-control" id="siglas" name="siglas" th:value="${asociacion.siglas}"
+                    required>
+            </div>
+            <button type="submit" class="btn btn-success">GUARDAR ASOCIACIÓN</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-premium/fondo-futbol-o-futbol-pelota-grande-colores-azules_444390-18092.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 80px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        .form-control {
+            display: block;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: visible;
+            width: 120%;
+            text-align: center;
+        }
+    </style>
+
+</body>
+
+</html>

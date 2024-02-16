@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<title>PRUEBAS SABER PRO</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="d-flex justify-content-center align-items-center">
+			<form method="post" th:action="@{/coordinadores/guardar}" th:object="${estudiante}"
+				style="text-align: center;">
+
+				<h2>EDITAR ESTUDIANTE</h2>
+
+				<input type="hidden" th:field="*{id}" />
+				<input type="hidden" th:field="*{TipoDocumento}" />
+
+				<div class="form-group">
+					<label for="NumeroDocumento"><strong>NÚMERO DE DOCUMENTO:</strong></label>
+					<input type="number" class="form-control" id="NumeroDocumento" name="NumeroDocumento"
+						th:value="${estudiante.NumeroDocumento}">
+				</div>
+
+				<div class="form-group">
+					<label for="PrimerApellido"><strong>PRIMER APELLIDO:</strong></label>
+					<input type="text" class="form-control" id="PrimerApellido" name="PrimerApellido"
+						th:value="${estudiante.PrimerApellido}">
+				</div>
+
+				<div class="form-group">
+					<label for="SegundoApellido"><strong>SEGUNDO APELLIDO:</strong></label>
+					<input type="text" class="form-control" id="SegundoApellido" name="SegundoApellido"
+						th:value="${estudiante.SegundoApellido}">
+				</div>
+
+				<div class="form-group">
+					<label for="PrimerNombre"><strong>PRIMER NOMBRE:</strong></label>
+					<input type="text" class="form-control" id="PrimerNombre" name="PrimerNombre"
+						th:value="${estudiante.PrimerNombre}">
+				</div>
+
+				<div class="form-group">
+					<label for="SegundoNombre"><strong>SEGUNDO NOMBRE:</strong></label>
+					<input type="text" class="form-control" id="SegundoNombre" name="SegundoNombre"
+						th:value="${estudiante.SegundoNombre}">
+				</div>
+
+				<div class="form-group">
+					<label for="CorreoElectronico"><strong>CORREO ELECTRONICO:</strong></label>
+					<input type="email" class="form-control" id="CorreoElectronico" name="CorreoElectronico"
+						th:value="${estudiante.CorreoElectronico}">
+				</div>
+
+				<div class="form-group">
+					<label for="NumeroTelefono"><strong>NÚMERO TELEFONICO:</strong></label>
+					<input type="number" class="form-control" id="NumeroTelefono" name="NumeroTelefono"
+						th:value="${estudiante.NumeroTelefono}">
+				</div>
+
+				<div class="form-group">
+					<label for="NumeroRegistro"><strong>NÚMERO REGISTRO:</strong></label>
+					<input type="text" class="form-control" id="NumeroRegistro" name="NumeroRegistro"
+						th:value="${estudiante.NumeroRegistro}">
+				</div>
+
+				<button type="submit" class="btn btn-warning"><strong>GUARDAR ESTUDIANTE</strong></button>
+			</form>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+</body>
+
+<style>
+	body {
+		background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-tema-aprendizaje-educacion_405287-103.jpg?w=2000');
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		margin-top: 70px;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	}
+
+	.container {
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.7);
+		padding: 20px;
+		border-radius: 10px;
+	}
+
+	.tab-content {
+		margin-top: 30px;
+	}
+
+	h2 {
+		margin-top: 20px;
+		font-size: 3em;
+	}
+
+	select,
+	input {
+		text-align: center;
+	}
+</style>
+</html>

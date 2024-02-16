@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>FUTBOL CLUB</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="tab-pane fade show active" id="Crear" role="tabpanel">
+
+            <h2>CREAR CLUB</h2>
+
+            <form th:action="@{/clubes/guardarClubes}" th:object="${clubes}" method="post">
+
+                <input type="hidden" th:field="*{id}">
+
+                <div class="form-group">
+                    <label for="nombreClub">CLUB:</label>
+                    <input type="text" class="form-control" id="nombreClub" th:field="*{nombre}">
+                </div>
+
+                <div class="form-group">
+                    <label for="nombreDirector">DIRECTOR:</label>
+                    <select th:field="*{directores}" id="nombreDirector" class="form-control">
+                        <option th:each="director : ${directores}" th:value="${director.id}" th:text="${director.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombreJugador">JUGADOR:</label>
+                    <select th:field="*{jugadores}" id="nombreJugador" class="form-control">
+                        <option th:each="jugador : ${jugadores}" th:value="${jugador.id}" th:text="${jugador.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombreAsociacion">ASOCIACIÓN:</label>
+                    <select th:field="*{asociaciones}" id="nombreAsociacion" class="form-control">
+                        <option th:each="asociacion : ${asociaciones}" th:value="${asociacion.id}" th:text="${asociacion.nombre}"></option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="nombreCompeticion">COMPETENCIA:</label>
+                    <select th:field="*{competencias}" id="nombreCompeticion" class="form-control">
+                        <option th:each="competicion : ${competencias}" th:value="${competicion.id}" th:text="${competicion.nombres}"></option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success">GUARDAR CLUB</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-premium/fondo-futbol-o-futbol-pelota-grande-colores-azules_444390-18092.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 50px;
+        }
+
+        ul a {
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+        }
+
+        .regresar {
+            margin-right: 1000px;
+        }
+
+        .container {
+            color: #ffffff;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 60px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .list-group {
+            text-align: center;
+            margin-right: 700px;
+        }
+
+
+        .list-group-item {
+            border: none;
+            background-color: transparent;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .columnas {
+            border: 5px solid black;
+            color: #000000;
+            background-color: #dbc800;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .filas {
+            border: 5px solid black;
+            color: #000000;
+            background-color: #929292;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .form-group option {
+            text-align: center;
+        }
+
+        .form-control {
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        label{
+            font-size: 25px;
+        }
+    </style>
+
+</body>
+
+</html>

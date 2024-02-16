@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<title>PRUEBAS SABER PRO</title>
+</head>
+
+<body>
+
+	<div class="container">
+
+		<div class="regresar">
+			<a th:href="@{/regresar}"><i class="fa-solid fa-arrow-left fa-beat-fade"
+					style="color: rgb(0, 0, 0);"></i></a>
+		</div>
+
+		<ul class="nav justify-content-center" id="crudTabs" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="listar-tab" data-toggle="tab" href="#listar" role="tab"><i
+						class="fa-solid fa-pen-to-square" style="color: rgb(0, 0, 0);"></i> LISTAR</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" id="crear-tab" data-toggle="tab" href="#crear" role="tab"> <i
+						class="fa-solid fa-plus" style="color: rgb(0, 0, 0);"></i> CREAR ESTUDIANTE</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" id="vistas-tab" data-toggle="tab" href="#añadir" role="tab"> <i
+						class="fa-solid fa-address-book" style="color: #000000;"></i> AÑADIR NOTAS</a>
+			</li>
+
+			<li class="nav-item">
+				<a class="nav-link" id="crearUsuario-tab" data-toggle="tab" href="#crearUsuario" role="tab"> <i
+						class="fa-solid fa-user" style="color: #000000;"></i> AUTENTICACIÓN</a>
+			</li>
+		</ul>
+
+		<div class="tab-content" id="crudTabContent">
+			<div class="tab-pane fade show active text-center" id="listar" role="tabpanel">
+				<h2>LISTADO DE ESTUDIANTES</h2>
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr class="columnas">
+								<th>TIPO DE DOCUMENTO</th>
+								<th>NÚMERO DOCUMENTO</th>
+								<th>PRIMER APELLIDO</th>
+								<th>SEGUNDO APELLIDO</th>
+								<th>PRIMER NOMBRE</th>
+								<th>SEGUNDO NOMBRE</th>
+								<th>CORREO ELECTRONICO</th>
+								<th>NÚMERO TELEFONO</th>
+								<th>NÚMERO REGISTRO</th>
+								<th>PUNTAJE</th>
+								<th>VISTO</th>
+								<th>ACCIÓN</th>
+							</tr>
+						</thead>
+						<tbody class="filas">
+							<tr th:each="estudiante : ${estudiantes}">
+								<td th:text="${estudiante.TipoDocumento}"></td>
+								<td th:text="${estudiante.NumeroDocumento}"></td>
+								<td th:text="${estudiante.PrimerApellido}"></td>
+								<td th:text="${estudiante.SegundoApellido}"></td>
+								<td th:text="${estudiante.PrimerNombre}"></td>
+								<td th:text="${estudiante.SegundoNombre}"></td>
+								<td th:text="${estudiante.CorreoElectronico}"></td>
+								<td th:text="${estudiante.NumeroTelefono}"></td>
+								<td th:text="${estudiante.NumeroRegistro}"></td>
+								<td th:text="${estudiante.Puntaje}"></td>
+								<td>
+									<span th:if="${estudiante.notasVistas}">Sí</span>
+									<span th:unless="${estudiante.notasVistas}">No</span>
+								</td>
+								<td>
+									<a th:href="@{/coordinadores/editar/{id}(id=${estudiante.id})}">
+										<i class="fa-solid fa-pen-to-square" style="color: #144422;"></i>
+									</a>
+
+									<a th:href="@{/coordinadores/eliminar/{id}(id=${estudiante.id})}">
+										<i class="fa-solid fa-trash" style="color: #ff0000;"></i>
+									</a>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!--CREAR ESTUDIANTE-->
+			<div class="tab-pane fade" id="crear" role="tabpanel">
+				<div class="d-flex justify-content-center align-items-center">
+					<form method="post" th:action="@{/coordinadores/guardar}">
+						<h2>CREAR ESTUDIANTE</h2>
+						<div class="form-group">
+							<label for="TipoDocumento"><strong>TIPO DE DOCUMENTO:</strong></label>
+							<select name="TipoDocumento" class="form-control">
+								<option value="CEDULA">CEDULA</option>
+								<option value="PASAPORTE">PASAPORTE</option>
+								<option value="CEDULA EXTRANJERA">CEDULA EXTRANJERA</option>
+							</select>
+						</div>
+
+						<div class="form-group">
+							<label for="NumeroDocumento"><strong>NÚMERO DE DOCUMENTO:</strong></label>
+							<input type="number" class="form-control" id="NumeroDocumento" name="NumeroDocumento"
+								required>
+						</div>
+
+						<div class="form-group">
+							<label for="PrimerApellido"><strong>PRIMER APELLIDO:</strong></label>
+							<input type="text" class="form-control" id="PrimerApellido" name="PrimerApellido" required>
+						</div>
+
+						<div class="form-group">
+							<label for="SegundoApellido"><strong>SEGUNDO APELLIDO:</strong></label>
+							<input type="text" class="form-control" id="SegundoApellido" name="SegundoApellido">
+						</div>
+
+						<div class="form-group">
+							<label for="PrimerNombre"><strong>PRIMER NOMBRE:</strong></label>
+							<input type="text" class="form-control" id="PrimerNombre" name="PrimerNombre" required>
+						</div>
+
+						<div class="form-group">
+							<label for="SegundoNombre"><strong>SEGUNDO NOMBRE:</strong></label>
+							<input type="text" class="form-control" id="SegundoNombre" name="SegundoNombre">
+						</div>
+
+						<div class="form-group">
+							<label for="CorreoElectronico"><strong>CORREO ELECTRONICO:</strong></label>
+							<input type="email" class="form-control" id="CorreoElectronico" name="CorreoElectronico"
+								required>
+						</div>
+
+						<div class="form-group">
+							<label for="NumeroTelefono"><strong>NÚMERO TELEFONICO:</strong></label>
+							<input type="number" class="form-control" id="NumeroTelefono" name="NumeroTelefono"
+								required>
+						</div>
+
+						<div class="form-group">
+							<label for="NumeroRegistro"><strong>NÚMERO REGISTRO:</strong></label>
+							<input type="text" class="form-control" id="NumeroRegistro" name="NumeroRegistro" required>
+						</div>
+						<button type="submit" class="btn btn-warning"><strong>GUARDAR ESTUDIANTE</strong></button>
+					</form>
+				</div>
+			</div>
+
+			<!--ANADIR NOTAS ESTUDIANTE-->
+			<div class="tab-pane fade" id="añadir" role="tabpanel">
+				<div class="d-flex justify-content-center align-items-center">
+					<form method="get" th:action="@{/coordinadores/mostrarEstudiantes/{id}}">
+						<div class="form-group custom-input">
+							<label><strong>SELECCIONE UN ESTUDIANTE:</strong></label>
+							<select name="estudianteId" id="estudiante" class="form-control">
+								<option th:each="estudiante : ${estudiantes}" th:value="${estudiante.id}"
+									th:text="${estudiante.primerApellido} + ' ' + ${estudiante.primerNombre}"></option>
+							</select>
+							<br>
+							<button type="submit" class="btn btn-warning"><strong>AÑADIR NOTAS</strong></button>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<!--CREDENCIALES ESTUDIANTE-->
+			<div class="tab-pane fade" id="crearUsuario" role="tabpanel">
+				<div class="d-flex justify-content-center align-items-center">
+					<form method="post" th:action="@{/credenciales}" id="credencialesForm">
+						<h2>CREDENCIALES ESTUDIANTES</h2>
+
+						<div class="form-group custom-input">
+							<label><i class="fa-solid fa-user"></i></label>
+							<select name="estudianteId" id="estudiante" class="form-control">
+								<option th:each="estudiante : ${estudiantes}" th:value="${estudiante.id}">
+									<span th:text="${estudiante.primerApellido + ' ' + estudiante.primerNombre}"></span>
+								</option>
+							</select>
+						</div>
+
+						<div class="form-group custom-input">
+							<label><i class="fa-solid fa-lock"></i></label>
+							<input class="form-control" type="text" name="estudianteNombre" id="estudianteNombre"
+								placeholder="USUARIO" required />
+						</div>
+
+						<div class="form-group custom-input">
+							<label> <i class="fa-solid fa-lock"></i></label>
+							<input class="form-control" type="password" id="contraseña" name="contraseña"
+								placeholder="CONTRASEÑA" required />
+						</div>
+						<button type="submit" class="btn btn-warning"><strong>GUARDAR CREDENCIALES</strong></button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+</body>
+
+<style>
+	body {
+		background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-tema-aprendizaje-educacion_405287-103.jpg?w=2000');
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		margin-top: 70px;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	}
+
+	.container {
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.7);
+		padding: 20px;
+		border-radius: 10px;
+	}
+
+	.regresar {
+		font-size: 50px;
+		margin-right: 1000px;
+	}
+
+	ul a {
+		font-size: 25px;
+		color: blue;
+	}
+
+	.tab-content {
+		margin-top: 30px;
+	}
+
+	h2 {
+		margin-top: 20px;
+		font-size: 3em;
+	}
+
+	.columnas {
+		color: rgb(0, 0, 128);
+	}
+
+	select,
+	input {
+		text-align: center;
+	}
+
+	.alert {
+		margin-top: 20px;
+	}
+
+	td {
+		font-weight: bold;
+	}
+</style>
+
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<title>PRUEBAS SABER PRO</title>
+</head>
+
+<body>
+	<div class="container">
+
+		<div class="regresar">
+			<a th:href="@{/regresarPrincipal}"><i class="fa-solid fa-arrow-left fa-beat-fade"
+					style="color: rgb(0, 0, 0);"></i></a>
+		</div>
+
+		<div class="d-flex justify-content-center align-items-center">
+			<form method="post" th:action="@{/coordinadores/guardarNotas}" th:object="${notas}">
+
+				<h2>REGISTAR NOTAS ESTUDIANTE</h2>
+
+				<div id="camposNotas">
+					<div class="form-group">
+						<label><strong>PUNTAJE TOTAL:</strong></label>
+						<p><strong>"SI FUE ANULADO DIGITE LOS NOTAS EN CERO"</strong></p>
+						<input type="text" class="form-control PuntajeTotal" id="PuntajeTotal" name="PuntajeTotal" />
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel1 hidden" id="nivel1" name="nivel1" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="ComunicacionEscrita"><strong>COMUNICACIÓN ESCRITA:</strong></label>
+						<input type="number" class="form-control ComunicacionEscrita" id="ComunicacionEscrita"
+							name="ComunicacionEscrita">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel2 hidden" id="nivel2" name="nivel2" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="RazonamientoCuantitativo"><strong>RAZONAMIENTO CUANTITATIVO:</strong></label>
+						<input type="number" class="form-control RazonamientoCuantitativo" id="RazonamientoCuantitativo"
+							name="RazonamientoCuantitativo">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel3 hidden" id="nivel3" name="nivel3" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="LecturaCritica"><strong>LECTURA CRITICA:</strong></label>
+						<input type="number" class="form-control LecturaCritica" id="LecturaCritica"
+							name="LecturaCritica">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel4 hidden" id="nivel4" name="nivel4" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="CompetenciaCiudadana"><strong>COMPETENCIA CIUDADANA:</strong></label>
+						<input type="number" class="form-control CompetenciaCiudadana" id="CompetenciaCiudadana"
+							name="CompetenciaCiudadana">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel5 hidden" id="nivel5" name="nivel5" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="Ingles"><strong>INGLES:</strong></label>
+						<input type="number" class="form-control Ingles" id="Ingles" name="Ingles">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel6 hidden" id="nivel6" name="nivel6" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="FormulacionProyectos"><strong>FORMULACIÓN DE PROYECTOS DE
+								INGENIERIA:</strong></label>
+						<input type="number" class="form-control FormulacionProyectos" id="FormulacionProyectos"
+							name="FormulacionProyectos">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel7 hidden" id="nivel7" name="nivel7" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="PensamientoCientificoMatematico"><strong>PENSAMIENTO CIENTIFICO - MATEMATICO Y
+								ESTADISTICA:</strong></label>
+						<input type="number" class="form-control PensamientoCientificoMatematico"
+							id="PensamientoCientificoMatematico" name="PensamientoCientificoMatematico">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel8 hidden" id="nivel8" name="nivel8" readonly>
+					</div>
+
+					<div class="form-group">
+						<label for="DisenoSoftware"><strong>DISEÑO DE SOFTWARE:</strong></label>
+						<input type="number" class="form-control DisenoSoftware" id="DisenoSoftware"
+							name="DisenoSoftware">
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel9 hidden" id="nivel9" name="nivel9" readonly>
+					</div>
+
+					<div class="form-group">
+						<input type="text" class="form-control nivel10 hidden" id="nivel10" name="nivel10" readonly>
+					</div>
+
+					<input type="hidden" name="estudianteId" th:value="${estudiante.id}" />
+				</div>
+
+				<button type="submit" class="btn btn-warning"><strong>GUARDAR NOTAS</strong></button>
+			</form>
+		</div>
+	</div>
+
+	<script>
+		$(document).ready(function () {
+			// Función para mostrar u ocultar campos de notas
+			function toggleCamposNotas() {
+				var puntajeTotal = $("#PuntajeTotal").val().toUpperCase(); // Convierte el valor a mayúsculas
+				var camposNotas = $("#camposNotas");
+
+				if (puntajeTotal === "ANULADO") {
+					camposNotas.hide();
+				} else {
+					camposNotas.show();
+				}
+			}
+
+			// Ejecutar la función al cargar la página y cada vez que cambie el valor de PuntajeTotal
+			toggleCamposNotas();
+			$("#PuntajeTotal").on("input", toggleCamposNotas);
+
+			// Función para calcular el puntaje total y establecerlo en cero si está anulado
+			function calcularPuntajeTotal() {
+				var puntajeTotal = $("#PuntajeTotal").val().toUpperCase(); // Convierte el valor a mayúsculas
+				if (puntajeTotal !== "ANULADO") {
+					var sumaNotas = 0;
+					var inputsNotas = [
+						"ComunicacionEscrita",
+						"RazonamientoCuantitativo",
+						"LecturaCritica",
+						"CompetenciaCiudadana",
+						"Ingles",
+						"FormulacionProyectos",
+						"PensamientoCientificoMatematico",
+						"DiseñoSoftware"
+					];
+
+					for (var i = 0; i < inputsNotas.length; i++) {
+						var inputId = inputsNotas[i];
+						var nota = parseFloat($("#" + inputId).val());
+						if (!isNaN(nota)) {
+							sumaNotas += nota;
+						}
+					}
+					// Dividir la suma de notas entre 8
+					puntajeTotal = sumaNotas / 8;
+				} else {
+					// Si está anulado, establecer puntajeTotal en cero
+					puntajeTotal = 0;
+				}
+
+				// Redondear y mostrar el resultado
+				$("#PuntajeTotal").val(Math.round(puntajeTotal));
+			}
+
+			// Ejecutar la función al cargar la página y cada vez que cambie el valor de una nota
+			calcularPuntajeTotal();
+			$(".form-group input[type='number']").on("input", calcularPuntajeTotal);
+
+			// Ejecutar toggleCamposNotas al cargar la página
+			toggleCamposNotas();
+		});
+
+		// Obtenemos referencias a los elementos HTML
+		const camposNotas = document.getElementById("camposNotas");
+
+		const puntajeTotal = document.querySelector(".PuntajeTotal");
+		const nivel1 = document.querySelector(".nivel1");
+		const comunicacionEscrita = document.querySelector(".ComunicacionEscrita");
+		const nivel2 = document.querySelector(".nivel2");
+		const razonamientoCuantitativo = document.querySelector(".RazonamientoCuantitativo");
+		const nivel3 = document.querySelector(".nivel3");
+		const lecturaCritica = document.querySelector(".LecturaCritica");
+		const nivel4 = document.querySelector(".nivel4");
+		const competenciaCiudadana = document.querySelector(".CompetenciaCiudadana");
+		const nivel5 = document.querySelector(".nivel5");
+		const ingles = document.querySelector(".Ingles");
+		const nivel6 = document.querySelector(".nivel6");
+		const formulacionProyectos = document.querySelector(".FormulacionProyectos");
+		const nivel7 = document.querySelector(".nivel7");
+		const pensamientoCientificoMatematico = document.querySelector(".PensamientoCientificoMatematico");
+		const nivel8 = document.querySelector(".nivel8");
+		const disenoSoftware = document.querySelector(".DisenoSoftware");
+		const nivel9 = document.querySelector(".nivel9");
+
+		let nivelAnterior = -1;
+
+		function actualizarNivel(valor, nivelElement) {
+			let nivel = 0;
+			let puntos = "";
+
+			if (valor >= 0 && valor <= 300) {
+				if (valor >= 191) {
+					nivel = 1;
+					puntos = "nivel 4";
+				} else if (valor >= 156) {
+					nivel = 2;
+					puntos = "nivel 3";
+				} else if (valor >= 126) {
+					nivel = 3;
+					puntos = "nivel 2";
+				} else if (valor >= 100) {
+					nivel = 4;
+					puntos = "nivel 1";
+				} else if (valor < 100) {
+					nivel = 4;
+					puntos = "ANULADO";
+				}
+			} else {
+				puntos = "ERROR";
+			}
+			nivelElement.value = puntos;
+		}
+
+		// Llama a actualizarNivel para los diferentes campos
+		function actualizarNiveles() {
+			actualizarNivel(parseInt(puntajeTotal.value), nivel1);
+			actualizarNivel(parseInt(comunicacionEscrita.value), nivel2);
+			actualizarNivel(parseInt(razonamientoCuantitativo.value), nivel3);
+			actualizarNivel(parseInt(lecturaCritica.value), nivel4);
+			actualizarNivel(parseInt(competenciaCiudadana.value), nivel5);
+			actualizarNivel(parseInt(ingles.value), nivel6);
+			actualizarNivel(parseInt(formulacionProyectos.value), nivel7);
+			actualizarNivel(parseInt(pensamientoCientificoMatematico.value), nivel8);
+			actualizarNivel(parseInt(disenoSoftware.value), nivel9);
+		}
+
+		puntajeTotal.addEventListener("input", actualizarNiveles);
+		comunicacionEscrita.addEventListener("keyup", actualizarNiveles);
+		razonamientoCuantitativo.addEventListener("keyup", actualizarNiveles);
+		lecturaCritica.addEventListener("keyup", actualizarNiveles);
+		competenciaCiudadana.addEventListener("keyup", actualizarNiveles);
+		ingles.addEventListener("keyup", actualizarNiveles);
+		formulacionProyectos.addEventListener("keyup", actualizarNiveles);
+		pensamientoCientificoMatematico.addEventListener("keyup", actualizarNiveles);
+		disenoSoftware.addEventListener("keyup", actualizarNiveles);
+
+		// Llama a actualizarNiveles para que se ejecute al cargar la página
+		actualizarNiveles();
+
+
+		// Resto del código de tu archivo JS ...
+		function actualizarNivelIngles(valor) {
+			let nivelIngles = "";
+			if (valor >= 0 && valor <= 300) {
+				if (valor >= 240) {
+					nivelIngles = "C2";
+				} else if (valor >= 180) {
+					nivelIngles = "B2";
+				} else if (valor >= 120) {
+					nivelIngles = "B1";
+				} else if (valor >= 60) {
+					nivelIngles = "A2";
+				} else if (valor >= 0) {
+					nivelIngles = "A1";
+				}
+			} else {
+				nivelIngles = "ERROR";
+			}
+			nivel10.value = nivelIngles;
+		}
+		// Agregar un evento para escuchar cambios en el campo Ingles
+		ingles.addEventListener("input", function () {
+			actualizarNivelIngles(parseInt(ingles.value));
+		});
+	</script>
+
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+</body>
+
+<style>
+	body {
+		background-image: url('https://img.freepik.com/vector-premium/fondo-transparente-tema-aprendizaje-educacion_405287-103.jpg?w=2000');
+		background-size: cover;
+		background-position: center;
+		background-attachment: fixed;
+		margin-top: 70px;
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	}
+
+	.container {
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.7);
+		padding: 20px;
+		border-radius: 10px;
+	}
+
+	.regresar {
+		font-size: 50px;
+		margin-right: 1000px;
+	}
+
+	.tab-content {
+		margin-top: 30px;
+	}
+
+	h2 {
+		font-size: 3em;
+	}
+
+	select,
+	input {
+		text-align: center;
+	}
+
+	p {
+		color: darkred;
+	}
+
+	.hidden {
+		display: none;
+	}
+</style>
+
+</html>

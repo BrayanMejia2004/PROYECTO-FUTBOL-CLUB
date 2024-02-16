@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>FUTBOL CLUB</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="tab-pane fade show active" id="listar" role="tabpanel">
+
+            <div class="regresar">
+                <a th:href="@{/clubes/regresar}"><i class="fa-solid fa-arrow-left fa-beat-fade"
+                        style="color: #ffffff;"></i></a>
+            </div>
+
+            <a th:href="@{/clubes/crearClubes}" class="btn btn-warning">CREAR CLUB</a>
+
+            <h2>LISTADO DE CLUBES</h2>
+            <table class="table">
+                <thead>
+                    <tr class="columnas">
+                        <th>NOMBRE CLUB</th>
+                        <th>DIRECTOR</th>
+                        <th>JUGADORES</th>
+                        <th>ASOCIACIÓN</th>
+                        <th>COMPETENCIAS</th>
+                        <th>ACCIONES</th>
+                    </tr>
+                </thead>
+                <tbody class="filas">
+                    <tr th:each="club : ${clubes}">
+                        <td th:text="${club.nombre}"></td>
+                        <td th:text="${club.directores != null ? club.directores.nombre : ''}"></td>
+                        <td
+                            th:text="${club.jugadores != null and club.jugadores.size() > 0 ? club.jugadores[0].nombre : ''}">
+                        </td>
+                        <td th:text="${club.asociaciones != null ? club.asociaciones.nombre : ''}"></td>
+                        <td
+                            th:text="${club.competencias != null and club.competencias.size() > 0 ? club.competencias[0].nombres : ''}">
+                        </td>
+                        <td>
+                            <a th:href="@{/clubes/editarClubes/{id}(id=${club.id})}"><i
+                                    class="fa-solid fa-pen-to-square" style="color: #144422;"></i></a>
+
+                            <a th:href="@{/clubes/eliminarClubes/{id}(id=${club.id})}"><i class="fa-solid fa-trash"
+                                    style="color: #ff0000;"></i></a>
+                        </td>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-premium/fondo-futbol-o-futbol-pelota-grande-colores-azules_444390-18092.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 50px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        ul a {
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+        }
+
+        .regresar {
+            margin-right: 1000px;
+        }
+
+        .regresar {
+            margin-top: 20px;
+            font-size: 50px;
+        }
+
+        .container {
+            color: #ffffff;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 60px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .list-group {
+            text-align: center;
+            margin-right: 700px;
+        }
+
+
+        .list-group-item {
+            border: none;
+            background-color: transparent;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .columnas {
+            border: 5px solid black;
+            color: #000000;
+            background-color: #dbc800;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .filas {
+            border: 5px solid black;
+            color: #000000;
+            background-color: #929292;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .form-group {
+            text-align: center;
+        }
+
+        .form-control {
+            width: 30%;
+            margin: 0 auto;
+        }
+
+        .btn {
+            margin-bottom: 30px;
+            font-size: 30px;
+        }
+    </style>
+</body>
+
+</html>

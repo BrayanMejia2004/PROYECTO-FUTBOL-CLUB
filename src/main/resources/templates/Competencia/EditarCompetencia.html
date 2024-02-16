@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>FUTBOL CLUB</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>EDITAR COMPETICIÓN</h2>
+        <form method="post" th:action="@{/competencias/guardarCompetencia}" th:object="${competencia}">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="nombres">Nombres:</label>
+                <input type="text" class="form-control" id="nombres" name="nombres" th:value="${competencia.nombres}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="premio">PREMIO:</label>
+                <input type="text" class="form-control" id="premio" name="premio" th:value="${competencia.premio}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="fechaIncial">FECHA INICIAL:</label>
+                <input type="text" class="form-control" id="fechaIncial" name="fechaIncial"
+                    th:value="${competencia.fechaIncial}" required>
+            </div>
+            <div class="form-group">
+                <label for="fechaFinal">FECHA FINAL:</label>
+                <input type="text" class="form-control" id="fechaFinal" name="fechaFinal"
+                    th:value="${competencia.fechaFinal}" required>
+            </div>
+            <button type="submit" class="btn btn-success">GUARDAR COMPETICIÓN</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-premium/fondo-futbol-o-futbol-pelota-grande-colores-azules_444390-18092.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 60px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        .form-control {
+            display: block;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: visible;
+            width: 120%;
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>

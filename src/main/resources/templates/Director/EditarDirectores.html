@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>FUTBOL CLUB</title>
+</head>
+
+<body>
+
+    <div class="container">
+        <h2>EDITAR DIRECTOR</h2>
+
+        <form method="post" th:action="@{/directores/guardarDirector}" th:object="${director}">
+            <input type="hidden" th:field="*{id}" />
+
+            <div class="form-group">
+                <label for="nombre">NOMBRE:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" th:value="${director.nombre}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="apellido">APELLIDO:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" th:value="${director.apellido}"
+                    required>
+            </div>
+            <div class="form-group">
+                <label for="edad">EDAD:</label>
+                <input type="number" class="form-control" id="edad" name="edad" th:value="${director.edad}" required>
+            </div>
+            <div class="form-group">
+                <label for="nacionalidad">NACIONALIDAD:</label>
+                <input type="text" class="form-control" id="nacionalidad" name="nacionalidad"
+                    th:value="${director.nacionalidad}" required>
+            </div>
+            <button type="submit" class="btn btn-success">GUARDAR DIRECTOR</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-premium/fondo-futbol-o-futbol-pelota-grande-colores-azules_444390-18092.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 70px;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h2 {
+            font-size: 60px;
+            margin-bottom: 30px;
+        }
+
+        label {
+            font-size: 20px;
+        }
+
+        .form-control {
+            display: block;
+            margin: 0 auto;
+            box-sizing: border-box;
+            overflow: visible;
+            width: 120%;
+            text-align: center;
+        }
+    </style>
+</body>
+
+</html>

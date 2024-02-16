@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<title>PRUEBAS SABER PRO</title>
+</head>
+
+<body>
+	<div class="container">
+		<div class="regresar">
+			<a th:href="@{/regresar}"><i class="fa-solid fa-arrow-left fa-beat-fade"
+					style="color: rgb(0, 0, 0);"></i></a>
+		</div>
+
+		<ul class="nav justify-content-center" id="crudTabs" role="tablist">
+			<li class="nav-item">
+				<a class="nav-link active" id="listar-tab" data-toggle="tab" href="#notas" role="tab"><i
+						class="fa-solid fa-clipboard" style="color: #000000;"></i> PUNTAJE PRUEBAS SABER PRO</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="crear-tab" data-toggle="tab" href="#notasDetalladas" role="tab"> <i
+						class="fa-regular fa-clipboard" style="color: #000000;"></i> PUNTAJE DETALLADO SABER PRO</a>
+			</li>
+		</ul>
+
+		<h2>PUNTAJE PRUEBA SABER PRO</h2>
+
+		<div class="tab-content" id="crudTabContent">
+			<div class="tab-pane fade show active text-center" id="notas" role="tabpanel">
+				<div class="container1">
+					<div class="form-group">
+						<label for="NumeroDocumento"><strong>NÚMERO DE DOCUMENTO:</strong></label>
+						<span th:text="${estudiante.NumeroDocumento}"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="PrimerApellido"><strong>PRIMER APELLIDO:</strong></label>
+						<span th:text="${estudiante.PrimerApellido}"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="SegundoApellido"><strong>SEGUNDO APELLIDO:</strong></label>
+						<span th:text="${estudiante.SegundoApellido}"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="PrimerNombre"><strong>PRIMER NOMBRE:</strong></label>
+						<span th:text="${estudiante.PrimerNombre}"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="SegundoNombre"><strong>SEGUNDO NOMBRE:</strong></label>
+						<span th:text="${estudiante.SegundoNombre}"></span>
+					</div>
+
+					<div class="form-group">
+						<label for="NumeroRegistro"><strong>NÚMERO DE REGISTRO:</strong></label>
+						<span th:text="${estudiante.NumeroRegistro}"></span>
+					</div>
+				</div>
+
+				<div class="form-group puntaje1">
+					<label for="Puntaje" class="puntaje"><strong>PUNTAJE:</strong></label>
+					<span th:text="${estudiante.Puntaje}" class="puntaje"></span>
+				</div>
+			</div>
+
+			<!-- PUNTAJE DETALLADO -->
+			<div class="tab-pane fade" id="notasDetalladas" role="tabpanel">
+				<div class="table-responsive">
+					<table class="table">
+						<thead>
+							<tr class="columnas">
+								<th>PUNTAJE</th>
+								<th>NIVEL</th>
+								<th>COMUNICACION ESCRITA</th>
+								<th>NIVEL</th>
+								<th>RAZONAMIENTO CUANTITATIVO</th>
+								<th>NIVEL</th>
+								<th>LECTURA CRITICA</th>
+								<th>NIVEL</th>
+								<th>COMPETENCIA CIUDADANA</th>
+								<th>NIVEL</th>
+								<th>INGLES</th>
+								<th>NIVEL</th>
+								<th>FORMULACIÓN DE PROYECTOS DE INGENIERIA</th>
+								<th>NIVEL</th>
+								<th>PENSAMIENTO CIENTIFICO Y ESTATISTICA</th>
+								<th>NIVEL</th>
+								<th>DISEÑO DE SOFTWARE</th>
+								<th>NIVEL</th>
+								<th>NIVEL DE INGLES</th>
+							</tr>
+						</thead>
+						<tbody class="filas">
+							<tr>
+								<td th:text="${nota != null ? nota.PuntajeTotal : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel1 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.ComunicacionEscrita : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel2 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.RazonamientoCuantitativo : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel3 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.LecturaCritica : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel4 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.CompetenciaCiudadana : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel5 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.Ingles : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel6 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.FormulacionProyectos : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel7 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.PensamientoCientificoMatematico : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel8 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.DisenoSoftware : ''}"></td>
+								<td th:text="${nota != null ? nota.nivel9 : ''}" class="nivel"></td>
+								<td th:text="${nota != null ? nota.nivel10 : ''}"></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script>
+		// Obtén todas las celdas con la clase "nivel"
+		var celdasNivel = document.querySelectorAll('.nivel');
+
+		// Itera a través de las celdas y define el color según el nivel
+		celdasNivel.forEach(function (celda) {
+			var nivel = celda.textContent.trim(); // Obtiene el nivel desde el contenido de la celda
+			switch (nivel) {
+				case 'ANULADO':
+					celda.classList.add('nivel4');
+					break;
+				case 'nivel 1':
+					celda.classList.add('nivel1');
+					break;
+				case 'nivel 2':
+					celda.classList.add('nivel2');
+					break;
+				case 'nivel 3':
+					celda.classList.add('nivel3');
+					break;
+				case 'nivel 4':
+					celda.classList.add('nivel4');
+					break;
+			}
+		});
+	</script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+	<style>
+		body {
+			background-image: url('https://img.freepik.com/vector-premium/bienvenido-nuevo-al-diseno-fondo-escolar-espacio-copia-agregar-texto-concepto-educacion-pizarra-escolar-diferentes-cosas_178156-1049.jpg');
+			background-size: cover;
+			background-position: center;
+			background-attachment: fixed;
+			margin-top: 70px;
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		}
+
+		.container {
+			text-align: center;
+			background-color: rgba(255, 255, 255, 0.7);
+			padding: 20px;
+			border-radius: 10px;
+		}
+
+		.regresar {
+			font-size: 50px;
+			margin-right: 1000px;
+		}
+
+		ul a {
+			font-size: 25px;
+			color: blue;
+		}
+
+		.columnas {
+			color: rgb(0, 0, 128);
+		}
+
+		.tab-content {
+			margin-top: 30px;
+		}
+
+		h2 {
+			margin-top: 20px;
+			font-size: 3em;
+		}
+
+		label,
+		span {
+			font-size: 20px;
+		}
+
+		.container1 {
+			display: flex;
+			padding: 20px;
+		}
+
+		.puntaje1 {
+			background-color: green;
+			color: white;
+			border-radius: 10px;
+		}
+
+		.puntaje {
+			font-size: 50px;
+		}
+
+		.nivel1 {
+			color: red;
+		}
+
+		.nivel2 {
+			color: blue;
+		}
+
+		.nivel3 {
+			color: chocolate;
+		}
+
+		.nivel4 {
+			color: green;
+		}
+
+		td {
+			font-weight: bold;
+			font-size: 20px;
+		}
+	</style>
+</body>
+
+</html>

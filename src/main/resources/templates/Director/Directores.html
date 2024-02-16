@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <title>DIRECTORES</title>
+</head>
+
+<body>
+    <div class="container">
+
+
+        <ul class="nav nav-tabs" id="crudTabs" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="listar-tab" data-toggle="tab" href="#listar" role="tab"> <i
+                        class="fa-solid fa-pen-to-square" style="color: #000000;"></i>LISTAR</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="crear-tab" data-toggle="tab" href="#crear" role="tab"> <i
+                        class="fa-solid fa-plus" style="color: #ffffff;"></i>CREAR</a>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="crudTabContent">
+
+            <div class="regresar">
+                <a th:href="@{/directores/regresar}"><i class="fa-solid fa-arrow-left fa-beat-fade"
+                        style="color: #ffffff;"></i></a>
+            </div>
+
+            <div class="tab-pane fade show active" id="listar" role="tabpanel">
+                <h2>LISTADO DE DIRECTORES</h2>
+                <table class="table">
+                    <thead>
+                        <tr class="columnas">
+                            <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Edad</th>
+                            <th>Nacionalidad</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody class="filas">
+                        <tr th:each="director : ${directores}">
+                            <td th:text="${director.nombre}"></td>
+                            <td th:text="${director.apellido}"></td>
+                            <td th:text="${director.edad}"></td>
+                            <td th:text="${director.nacionalidad}"></td>
+                            <td>
+                                <a th:href="@{/directores/editarDirector/{id}(id=${director.id})}"><i
+                                        class="fa-solid fa-pen-to-square" style="color: #144422;"></i></a>
+
+                                <a th:href="@{/directores/eliminarDirector/{id}(id=${director.id})}"><i
+                                        class="fa-solid fa-trash" style="color: #ff0000;"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="crear" role="tabpanel">
+                <h2>CREAR DIRECTOR</h2>
+
+                <form method="post" th:action="@{/directores/guardarDirector}">
+                    <div class="form-group">
+                        <label for="nombre">NOMBRE:</label>
+                        <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apellido">APELLIDO:</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="edad">EDAD:</label>
+                        <input type="number" class="form-control" id="edad" name="edad" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nacionalidad">NACIONALIDAD:</label>
+                        <input type="text" class="form-control" id="nacionalidad" name="nacionalidad" required>
+                    </div>
+                    <button type="submit" class="btn btn-success">GUARDAR DIRECTOR</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/d111faab9b.js" crossorigin="anonymous"></script>
+
+    <style>
+        body {
+            background-image: url('https://img.freepik.com/vector-premium/fondo-futbol-o-futbol-pelota-grande-colores-azules_444390-18092.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            margin-top: 30px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        ul a {
+            color: rgb(255, 255, 255);
+            font-size: 20px;
+        }
+
+        .regresar {
+            margin-right: 1000px;
+        }
+
+        .regresar {
+            margin-top: 20px;
+            font-size: 50px;
+        }
+
+        .container {
+            color: #ffffff;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 60px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .list-group {
+            text-align: center;
+            margin-right: 700px;
+        }
+
+
+        .list-group-item {
+            border: none;
+            background-color: transparent;
+        }
+
+        .list-group-item a {
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 30px;
+            color: #ffffff;
+        }
+
+        .columnas {
+            border: 5px solid black;
+            color: #000000;
+            background-color: #dbc800;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .filas {
+            border: 5px solid black;
+            color: #000000;
+            background-color: #929292;
+            text-align: center;
+            font-size: 20px;
+        }
+
+        .form-group {
+            text-align: center;
+        }
+
+        .form-control {
+            width: 30%;
+            margin: 0 auto;
+        }
+    </style>
+
+</body>
+
+</html>
